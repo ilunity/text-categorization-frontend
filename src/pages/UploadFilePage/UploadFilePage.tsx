@@ -11,7 +11,8 @@ type FieldType = {
 
 export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
     const [form] = Form.useForm<FieldType>();
-    const loadedFiles = Form.useWatch('fileList', form).length > 0;
+    const loadedFiles = Form.useWatch('fileList', form);
+    const hasLoaded = Array.isArray(loadedFiles) && loadedFiles.length > 0
 
     const onFinish = (values: FieldType) => {
         console.log('Received values of form: ', values);
@@ -30,12 +31,12 @@ export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
             <Form.Item<FieldType> name="fileList" noStyle>
                 <UploadFile/>
             </Form.Item>
-            <Form.Item<FieldType> style={{width: '100%', marginTop: 34}}>
+            <Form.Item<FieldType> style={{width: '100%', marginTop: hasLoaded ? 4 : 34}}>
                 <Button
                     block
                     type="primary"
                     htmlType="submit"
-                    disabled={!loadedFiles}
+                    disabled={!hasLoaded}
                 >
                     Продолжить
                 </Button>

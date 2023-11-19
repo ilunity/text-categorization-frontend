@@ -34,7 +34,7 @@ export const UploadFile: React.FC<UploadFileProps> = (
         },
         beforeUpload(file) {
             if (!isDocxFile(file)) {
-                message.error(`Файл должен быть формата .docx`);
+                message.error(`Файл должен соответствовать формату .docx`);
                 return Upload.LIST_IGNORE;
             }
 
