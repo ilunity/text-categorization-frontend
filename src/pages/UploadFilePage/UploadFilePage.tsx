@@ -2,7 +2,8 @@ import React from 'react';
 import {UploadFilePageProps} from './UploadFilePage.types';
 import {Button, Form} from "antd";
 import {UploadFile} from "../../components/UploadFile";
-import {UploadChangeParam} from "antd/es/upload";
+import {RcFile, UploadChangeParam} from "antd/es/upload";
+import {api} from "../../utils/api.ts";
 
 type FieldType = {
     fileList: UploadChangeParam['file'][];
@@ -14,8 +15,10 @@ export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
     const loadedFiles = Form.useWatch('fileList', form);
     const hasLoaded = Array.isArray(loadedFiles) && loadedFiles.length > 0
 
-    const onFinish = (values: FieldType) => {
-        console.log('Received values of form: ', values);
+    const onFinish = async (values: FieldType) => {
+        const file = values.fileList[0].originFileObj as RcFile;
+        const response = await api.analyseText(file);
+        console.log(`Response status from server: ${response?.status}`)
     };
 
     return (
