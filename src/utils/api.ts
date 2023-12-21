@@ -1,23 +1,24 @@
-import {RcFile} from "antd/es/upload";
-import axios from "axios";
+import { RcFile } from 'antd/es/upload';
+import axios from 'axios';
+import { AnalyseResultResponse, AnalyseTextResponse } from './api.types.ts';
 
-const SERVER_URL = 'http://localhost:3000';
+const SERVER_URL = 'http://localhost:8089';
 
 class Api {
-    analyseText = async (file: RcFile) => {
-        try {
-            const bodyFormData = new FormData();
-            bodyFormData.append('file', file);
+  analyseText = async (file: RcFile): AnalyseTextResponse => {
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
 
-            const response = await axios.post(`${SERVER_URL}/upload`, bodyFormData, {
-                headers: {"Content-Type": "multipart/form-data"}
-            });
+    const response = await axios.post(`${SERVER_URL}/analyse`, bodyFormData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
 
-            return response;
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    return response;
+  };
+  getAnalyseResult = async (id: string): AnalyseResultResponse => {
+    const response = await axios.get(`${SERVER_URL}/result/${id}`);
+    return response;
+  };
 }
 
 export const api = new Api();

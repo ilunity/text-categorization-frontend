@@ -1,8 +1,12 @@
-interface PieChartData  {export
-    type: string;
-    value: number;
+interface PieChartData {
+  name: string;
+  value: number;
 }
 
 export interface PieChartProps {
-    data: PieChartData[];
+  data: PieChartData[];
+}
+
+export interface ChartDownloadRef {
+  download: () => void;
 }
