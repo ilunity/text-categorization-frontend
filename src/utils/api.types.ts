@@ -10,11 +10,7 @@ export interface IApiError {
 
 /** --------------------------------------------- */
 
-export interface Tag {
-  name: string;
-  value: number;
-}
+export type TagsMap = Record<string, number>;
 
-export type AnalyseTextResponse = ApiRequestFnResponse<string>
-
-export type AnalyseResultResponse = ApiRequestFnResponse<Tag[]>
+export type AnalyseTextResponse = ApiRequestFnResponse<string>;
+export type AnalyseResultResponse = ApiRequestFnResponse<TagsMap>;

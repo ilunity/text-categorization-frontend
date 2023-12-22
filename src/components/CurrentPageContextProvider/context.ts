@@ -1,11 +1,16 @@
 import { createContext, Dispatch, SetStateAction, useContext } from 'react';
-import { IApiError, Tag } from '../../utils/api.types.ts';
+import { IApiError } from '../../utils/api.types.ts';
 
 export enum APP_PAGES {
   UPLOAD = 'UPLOAD',
   LOADING = 'LOADING',
   ERROR = 'ERROR',
   RESULT = 'RESULT',
+}
+
+export interface Tag {
+  name: string;
+  value: number;
 }
 
 export type CurrentPagePayload =

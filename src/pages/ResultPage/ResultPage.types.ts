@@ -1,5 +1,5 @@
-import {Tag} from "../../utils/api.types.ts";
+import { Tag } from '../../components/CurrentPageContextProvider/context.ts';
 
 export interface ResultPageProps {
-    tags: Tag[]
+  tags: Tag[];
 }

@@ -7,11 +7,11 @@ import { api } from '../../utils/api.ts';
 import { CenterWrapper } from '../../components/CenterWrapper';
 import { executeRequest } from '../../utils/execute-request.ts';
 import { APP_PAGES, useCurrentPageContext } from '../../components/CurrentPageContextProvider/context.ts';
+import { convertTagsType } from '../../utils/convert-tags-type.ts';
 
 type FieldType = {
   fileList: UploadChangeParam['file'][];
 };
-
 
 export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
   const [form] = Form.useForm<FieldType>();
@@ -42,7 +42,7 @@ export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
       if (success) {
         setPagePayload({
           page: APP_PAGES.RESULT,
-          data,
+          data: convertTagsType(data),
         });
       } else {
         setPagePayload({
@@ -70,12 +70,7 @@ export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
           <UploadFile />
         </Form.Item>
         <Form.Item<FieldType> style={ { width: '100%', marginTop: hasLoaded ? 4 : 34 } }>
-          <Button
-            block
-            type="primary"
-            htmlType="submit"
-            disabled={ !hasLoaded }
-          >
+          <Button block type="primary" htmlType="submit" disabled={ !hasLoaded }>
             Продолжить
           </Button>
         </Form.Item>
