@@ -35,7 +35,7 @@ export const UploadFilePage: React.FC<UploadFilePageProps> = () => {
     const interval = setInterval(async () => {
       const { success, data, error, status } = await executeRequest(() => api.getAnalyseResult(id as string));
 
-      if (status === 100) {
+      if (status === 202) {
         return;
       }
 

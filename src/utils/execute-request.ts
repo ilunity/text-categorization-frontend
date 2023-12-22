@@ -20,6 +20,16 @@ export const executeRequest = async <DataType>(
 ): Promise<IApiResponse<DataType>> => {
   try {
     const response = await requestFn();
+
+    if (response.status === 500) {
+      return {
+        data: null,
+        error: 'Ошибка на сервере',
+        success: false,
+        status: 500,
+      };
+    }
+
     return {
       data: response.data,
       error: null,
